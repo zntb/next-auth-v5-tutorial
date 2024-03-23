@@ -1,4 +1,4 @@
-import lock from '../public/lock.png';
+import lock from '@/public/images/lock.png';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Poppins } from 'next/font/google';
