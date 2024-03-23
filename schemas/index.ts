@@ -9,20 +9,14 @@ export const LoginSchema = z.object({
   }),
 });
 
-// export const RegisterSchema = LoginSchema.extend({
-//   name: z.string().min(1, {
-//     message: 'Name is required',
-//   }),
-//   username: z.string().min(1, {
-//     message: 'Username is required',
-//   }),
-//   password: z.string().min(1, {
-//     message: 'Password is required',
-//   }),
-//   confirmPassword: z.string().min(1, {
-//     message: 'Confirm password is required',
-//   }),
-//   acceptTerms: z.literal(true, {
-//     errorMap: () => ({ message: 'You must accept the terms and conditions' }),
-//   }),
-// });
+export const RegisterSchema = z.object({
+  email: z.string().email({
+    message: 'Email is required',
+  }),
+  password: z.string().min(6, {
+    message: 'Password is required and should be at least 6 characters',
+  }),
+  name: z.string().min(1, {
+    message: 'Name is required',
+  }),
+});
