@@ -5,11 +5,23 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/new-verification?token=${token}`;
-
   await resend.emails.send({
-    from: 'mail@auth-masterclass-tutorial.com',
-    to: email,
+    from: 'Acme <onboarding@resend.dev>',
+    to: [email],
     subject: 'Confirm your email',
-    html: `<p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
+    text: 'it works!',
+
+    html: `
+    <p>Click <a href="${confirmLink}">here</a> to confirm email.</p>
+  `,
+    headers: {
+      'X-Entity-Ref-ID': '123456789',
+    },
+    tags: [
+      {
+        name: 'category',
+        value: 'confirm_email',
+      },
+    ],
   });
 };
