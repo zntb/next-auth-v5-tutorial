@@ -26,7 +26,7 @@ export default function Home() {
           Simple Authentication Service
         </p>
         <div>
-          <LoginButton>
+          <LoginButton mode="modal" asChild>
             <Button variant="secondary" size="lg" className="mx-auto">
               Sign In
             </Button>
