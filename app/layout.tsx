@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Toaster } from '@/components/ui/sonner';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 import { Inter } from 'next/font/google';
@@ -21,7 +22,10 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Toaster position="top-right" richColors />
+          {children}
+        </body>
       </html>
     </SessionProvider>
   );
