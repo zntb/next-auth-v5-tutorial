@@ -92,7 +92,6 @@ export const LoginForm = () => {
                         placeholder="123456"
                         disabled={isPending}
                         type="text"
-                        autoComplete="one-time-code"
                       />
                     </FormControl>
                     <FormMessage />

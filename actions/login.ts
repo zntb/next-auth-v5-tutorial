@@ -13,6 +13,7 @@ import {
 } from '@/lib/tokens';
 import { db } from '@/lib/db';
 import { getTwoFactorConfirmationByUserId } from '@/data/two-factor-confirmation';
+import bcrypt from 'bcryptjs';
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validateFields = LoginSchema.safeParse(values);
@@ -42,7 +43,18 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { success: 'Confirmation email sent' };
   }
 
-  if (existingUser.isTwoFactorEnabled && existingUser.email) {
+  if (
+    existingUser.isTwoFactorEnabled &&
+    existingUser.email &&
+    existingUser.password
+  ) {
+    const passwordsMatch = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+    if (!passwordsMatch) {
+      return { error: 'Invalid password' };
+    }
     if (code) {
       const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email);
 

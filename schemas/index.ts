@@ -1,4 +1,53 @@
+import { UserRole } from '@prisma/client';
 import * as z from 'zod';
+
+export const SettingsSchema = z
+  .object({
+    name: z.optional(
+      z.string().min(3, 'Name is too short').max(20, 'Name is too long!')
+    ),
+    isTwoFactorEnabled: z.optional(z.boolean()),
+    role: z.enum([UserRole.USER, UserRole.ADMIN]),
+    email: z.optional(z.string().email()),
+    password: z.optional(z.string().min(6, 'Password is too short')),
+    newPassword: z.optional(z.string().min(6, 'Password is too short')),
+  })
+  .refine(
+    (data) => {
+      if (data.password && !data.newPassword) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'New password is required',
+      path: ['newPassword'],
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.newPassword && !data.password) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'Password is required',
+      path: ['password'],
+    }
+  )
+  .refine(
+    (data) => {
+      if (data.newPassword && data.newPassword === data.password) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'New password cannot be the same as old password',
+      path: ['newPassword'],
+    }
+  );
 
 export const NewPasswordSchema = z.object({
   password: z.string().min(6, {
