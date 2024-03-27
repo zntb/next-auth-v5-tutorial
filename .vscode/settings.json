@@ -8,5 +8,9 @@
     "sonner",
     "trpc",
     "uuidv"
-  ]
+  ],
+  "editor.tokenColorCustomizations": {
+    "comments": "",
+    "textMateRules": []
+  }
 }
