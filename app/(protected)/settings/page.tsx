@@ -130,6 +130,7 @@ const SettingsPage = () => {
                             type="password"
                             placeholder="******"
                             {...field}
+                            value={field.value === undefined ? '' : field.value}
                             disabled={isPending}
                           />
                         </FormControl>
@@ -148,6 +149,7 @@ const SettingsPage = () => {
                             type="password"
                             placeholder="******"
                             {...field}
+                            value={field.value === undefined ? '' : field.value}
                             disabled={isPending}
                           />
                         </FormControl>

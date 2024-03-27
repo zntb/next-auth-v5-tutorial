@@ -90,6 +90,7 @@ export const LoginForm = () => {
                     <FormControl>
                       <Input
                         {...field}
+                        value={field.value === undefined ? '' : field.value}
                         placeholder="123456"
                         disabled={isPending}
                         type="text"
