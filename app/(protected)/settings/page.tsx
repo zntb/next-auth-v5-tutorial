@@ -93,6 +93,7 @@ const SettingsPage = () => {
                         placeholder="John Doe"
                         {...field}
                         disabled={isPending}
+                        autoComplete="name"
                       />
                     </FormControl>
                     <FormMessage />
@@ -113,6 +114,7 @@ const SettingsPage = () => {
                             placeholder="john.doe@me.com"
                             {...field}
                             disabled={isPending}
+                            autoComplete="null"
                           />
                         </FormControl>
                         <FormMessage />
@@ -132,6 +134,7 @@ const SettingsPage = () => {
                             {...field}
                             value={field.value === undefined ? '' : field.value}
                             disabled={isPending}
+                            autoComplete="current-password"
                           />
                         </FormControl>
                         <FormMessage />
@@ -151,6 +154,7 @@ const SettingsPage = () => {
                             {...field}
                             value={field.value === undefined ? '' : field.value}
                             disabled={isPending}
+                            autoComplete="new-password"
                           />
                         </FormControl>
                         <FormMessage />
